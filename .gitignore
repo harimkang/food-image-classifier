@@ -1,3 +1,9 @@
-.vscode
-__pycache__
+# Data-set
 food-101/
+
+# cache
+__pycache__
+
+# environments
+.venv
+.vscode
