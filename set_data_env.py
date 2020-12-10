@@ -7,39 +7,43 @@ from shutil import copy
 from collections import defaultdict
 
 
-def ready_data():
+def ready_data(data='food-101'):
     """ 
     # It checks whether the food-101 dataset exists, 
     # if not, downloads it and returns the folder location.
     """
-    if "food-101" in os.listdir():
-        print("Dataset already exists")
-        if not os.path.exists(os.path.join('food-101', 'food-101')):
-            data_dir = 'food-101/'
+    if data == 'food-101':
+        if "food-101" in os.listdir():
+            print("Dataset already exists")
+            if not os.path.exists(os.path.join('food-101', 'food-101')):
+                data_dir = 'food-101/'
+            else:
+                data_dir = 'food-101/food-101/'
         else:
+            # TODO: Download data & extract (NOT Check)
+            print("Downloading the data...")
+            import wget
+            dl_add = 'http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz'
+            print("Dataset Downloaded...")
+            wget.download(url=dl_add, out='.')
+            print("Dataset Extracted...")
+            import tarfile
+            tar = tarfile.open(r"food-101.tar.gz", "r:gz")
+            for tarinfo in tar:
+                tar.extract(tarinfo, r'.')
+            print("Dataset Download Done...")
             data_dir = 'food-101/food-101/'
     else:
-        # TO DO: Download data & extract (NOT Check)
-        print("Downloading the data...")
-        import wget
-        dl_add = 'http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz'
-        print("Dataset Downloaded...")
-        wget.download(url=dl_add, out='.')
-        print("Dataset Extracted...")
-        import tarfile
-        tar = tarfile.open(r"food-101.tar.gz", "r:gz")
-        for tarinfo in tar:
-            tar.extract(tarinfo, r'.')
-        print("Dataset Download Done...")
-        data_dir = 'food-101/food-101/'
+        # TODO: other dataset added
+        data_dir = None
 
     # Create required directory
     if not os.path.exists(os.path.join('logs', 'training')):
         os.makedirs(os.path.join('logs', 'training'))
     if not os.path.exists(os.path.join('models', 'checkpoint')):
         os.makedirs(os.path.join('models', 'checkpoint'))
-    if not os.path.exists('results'):
-        os.makedirs('results')
+    if not os.path.exists('results', 'train'):
+        os.makedirs('results', 'train')
 
     return data_dir
 
@@ -68,7 +72,7 @@ def get_data(file_path, dest):
 
     if not os.path.exists(os.path.join(file_path, dest)):
         # Copy files matching dest to each appropriate folder.
-        print("no existed data/test folder : ", os.path.join(file_path, dest))
+        print("No existed data/test folder : ", os.path.join(file_path, dest))
         temp = defaultdict(list)
         os.makedirs(os.path.join(file_path, dest))
         for food in classes_imgs.keys():

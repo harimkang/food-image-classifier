@@ -3,31 +3,35 @@
 - https://www.kaggle.com/boopesh07/multiclass-food-classification-using-tensorflow
 """
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # tensorflow logging off
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-from tensorflow.keras import backend
-from tensorflow.keras import regularizers
-from tensorflow.keras.models import Model, load_model
-from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.models import Model, load_model
+from tensorflow.keras import regularizers
+from tensorflow.keras import backend
+
 
 class Inception_v3:
     """
     [Inception V3 Model]
     # Class created using inception_v3 provided in keras.applications
     """
+
     def __init__(self, class_list, img_width, img_height, batch_size) -> None:
 
         backend.clear_session()
 
         self.class_list = class_list
         self.img_width, self.img_height = img_width, img_height
-        self.batch_size = batch_size # batch_size can be up to 16 based on GPU 4GB (not available for 32) 
+        # batch_size can be up to 16 based on GPU 4GB (not available for 32)
+        self.batch_size = batch_size
 
         self.model = None
 
@@ -35,7 +39,7 @@ class Inception_v3:
         self.validation_data = None
         self.num_train_data = None
 
-        self.day_now = time.strftime('%Y%m%d', time.localtime(time.time()))
+        self.day_now = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
         self.checkpointer = None
         self.csv_logger = None
         self.history = None
@@ -133,11 +137,16 @@ class Inception_v3:
         else:
             print('Model not found... : load_model or train plz')
 
-    def prediction(self, img_path, show=True):
+    def prediction(self, img_path, show=True, save=False):
         """
         # Given a path for an image, the image is predicted and displayed through plt.
         """
-        img = image.load_img(img_path, target_size=())
+        target_name = img_path.split('.')[0]
+        target_name = target_name.split('/')[-1]
+        save_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
+
+        img = image.load_img(img_path, target_size=(
+            self.img_height, self.img_width))
         img = image.img_to_array(img)
         img = np.expand_dims(img, axis=0)
         img /= 255.
@@ -151,12 +160,16 @@ class Inception_v3:
                 plt.imshow(img[0])
                 plt.axis('off')
                 plt.title('prediction: {}'.format(pred_value))
-                print('[Model Prediction] {}: {}'.format(img_path, pred_value))
+                print('[Model Prediction] {}: {}'.format(
+                    target_name, pred_value))
                 plt.show()
+                if save:
+                    plt.savefig(
+                        'results/example_{}_{}.png'.format(target_name, save_time))
         else:
             print('Model not found... : load_model or train plz')
 
-    def load_recent_model(self):
+    def load(self):
         """
         # If an already trained model exists, load it.
         """
@@ -166,8 +179,11 @@ class Inception_v3:
             h5_list = [file for file in model_list if file.endswith(".hdf5")]
             h5_list.sort()
             backend.clear_session()
-            self.model = load_model(h5_list[-1], compile=False)
+            self.model = load_model(model_path + h5_list[-1], compile=False)
             print('Model loaded...: ', h5_list[-1])
+            self.model.compile(optimizer=SGD(lr=0.0001, momentum=0.9),
+                               loss='categorical_crossentropy',
+                               metrics=['accuracy'])
             return 1
         else:
             print('Model not found... : train plz')
@@ -181,8 +197,8 @@ class Inception_v3:
         if self.history is not None:
             title = 'model_accuracy_{}'.format(self.day_now)
             plt.title(title)
-            plt.plot(self.history.history['acc'])
-            plt.plot(self.history.history['val_acc'])
+            plt.plot(self.history.history['accuracy'])
+            plt.plot(self.history.history['val_accuracy'])
             plt.ylabel('accuracy')
             plt.xlabel('epoch')
             plt.legend(['train_acc', 'val_acc'], loc='best')
