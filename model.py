@@ -1,9 +1,12 @@
+"""
+# Reference
+- https://www.kaggle.com/boopesh07/multiclass-food-classification-using-tensorflow
+"""
 import os
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-import tensorflow as tf
 from tensorflow.keras import backend
 from tensorflow.keras import regularizers
 from tensorflow.keras.models import Model, load_model
@@ -13,15 +16,18 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger
 
-
 class Inception_v3:
+    """
+    [Inception V3 Model]
+    # Class created using inception_v3 provided in keras.applications
+    """
     def __init__(self, class_list, img_width, img_height, batch_size) -> None:
 
         backend.clear_session()
 
         self.class_list = class_list
         self.img_width, self.img_height = img_width, img_height
-        self.batch_size = batch_size
+        self.batch_size = batch_size # batch_size can be up to 16 based on GPU 4GB (not available for 32) 
 
         self.model = None
 
@@ -35,6 +41,11 @@ class Inception_v3:
         self.history = None
 
     def generate_train_val_data(self, num_train_data, data_dir='train/'):
+        """
+        # Create an ImageDataGenerator by dividing the train and validation set 
+        # by 0.8/0.2 based on the train dataset folder.
+        # train : 60600 imgs / validation : 15150 imgs
+        """
         self.num_train_data = num_train_data
         _datagen = image.ImageDataGenerator(
             rescale=1. / 255,
@@ -59,7 +70,10 @@ class Inception_v3:
         )
 
     def set_model(self):
-
+        """
+        # This is a function that composes a model, and proceeds to compile.
+        # [Reference] - https://www.tensorflow.org/api_docs/python/tf/keras/applications/inception_v3
+        """
         self.model = InceptionV3(weights='imagenet', include_top=False)
         x = self.model.output
         x = GlobalAveragePooling2D()(x)
@@ -76,6 +90,9 @@ class Inception_v3:
                            metrics=['accuracy'])
 
     def train(self, epochs=10):
+        """
+        # Training-related environment settings (log, checkpoint) and training
+        """
         train_samples = self.num_train_data * 0.8
         val_samples = self.num_train_data * 0.2
 
@@ -97,23 +114,29 @@ class Inception_v3:
         self.model.save(
             'models/food_classifier_model_{}.hdf5'.format(self.day_now))
 
-    def evaluation(self, data_dir='test/'):
+    def evaluation(self, batch_size=16, data_dir='test/', steps=5):
+        """
+        # Evaluate the model using the data in data_dir as a test set.
+        """
         if self.model is not None:
             test_datagen = image.ImageDataGenerator(rescale=1./255)
             test_generator = test_datagen.flow_from_directory(
                 data_dir,
                 target_size=(self.img_height, self.img_width),
-                batch_size=32,
+                batch_size=batch_size,
                 class_mode='categorical')
             scores = self.model.evaluate_generator(
                 test_generator,
-                steps=5)
+                steps=steps)
             print('Evaluation data: {}'.format(data_dir))
             print("%s: %.2f%%" % (self.model.metrics_names[1], scores[1]*100))
         else:
             print('Model not found... : load_model or train plz')
 
     def prediction(self, img_path, show=True):
+        """
+        # Given a path for an image, the image is predicted and displayed through plt.
+        """
         img = image.load_img(img_path, target_size=())
         img = image.img_to_array(img)
         img = np.expand_dims(img, axis=0)
@@ -128,11 +151,15 @@ class Inception_v3:
                 plt.imshow(img[0])
                 plt.axis('off')
                 plt.title('prediction: {}'.format(pred_value))
+                print('[Model Prediction] {}: {}'.format(img_path, pred_value))
                 plt.show()
         else:
             print('Model not found... : load_model or train plz')
 
     def load_recent_model(self):
+        """
+        # If an already trained model exists, load it.
+        """
         model_path = 'models/checkpoint/'
         model_list = os.listdir(model_path)
         if model_list:
@@ -147,6 +174,10 @@ class Inception_v3:
             return 0
 
     def show_accuracy(self):
+        """
+        # Shows the accuracy graph of the training history.
+        # TO DO: In the case of a loaded model, a function to find and display the graph is added
+        """
         if self.history is not None:
             title = 'model_accuracy_{}'.format(self.day_now)
             plt.title(title)
@@ -161,6 +192,10 @@ class Inception_v3:
             print('Model not found... : load_model or train plz')
 
     def show_loss(self):
+        """
+        # Shows the loss graph of the training history.
+        # TO DO: In the case of a loaded model, a function to find and display the graph is added
+        """
         if self.history is not None:
             title = 'model_loss_{}'.format(self.day_now)
             plt.title(title)
