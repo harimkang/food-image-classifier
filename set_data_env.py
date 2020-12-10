@@ -42,8 +42,8 @@ def ready_data(data='food-101'):
         os.makedirs(os.path.join('logs', 'training'))
     if not os.path.exists(os.path.join('models', 'checkpoint')):
         os.makedirs(os.path.join('models', 'checkpoint'))
-    if not os.path.exists('results', 'train'):
-        os.makedirs('results', 'train')
+    if not os.path.exists(os.path.join('results', 'train')):
+        os.makedirs(os.path.join('results', 'train'))
 
     return data_dir
 
