@@ -1,0 +1,121 @@
+PS C:\dev\source\food_image_classifier> coverage run -m unittest discover tests
+2020-12-16 17:31:57.446610: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+.Dataset already exists
+C:\dev\source\food_image_classifier\tests\test_train.py:27: DeprecationWarning: Please use assertTrue 
+instead.
+  self.assert_(result)
+.Dataset already exists
+already existed data/test folder :  food-101/test
+.Dataset already exists
+already existed data/test folder :  food-101/train
+.Dataset already exists
+.Dataset already exists
+.Dataset already exists
+Found 60600 images belonging to 101 classes.
+Found 15150 images belonging to 101 classes.
+2020-12-16 17:32:08.228228: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2020-12-16 17:32:08.259252: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1650 computeCapability: 7.5
+coreClock: 1.515GHz coreCount: 14 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 178.84GiB/s        
+2020-12-16 17:32:08.259419: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-12-16 17:32:08.281025: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-12-16 17:32:08.297607: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2020-12-16 17:32:08.299076: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2020-12-16 17:32:08.315158: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusolver64_10.dll
+2020-12-16 17:32:08.317778: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusparse64_10.dll
+2020-12-16 17:32:08.340442: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-12-16 17:32:08.341059: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-12-16 17:32:08.342628: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-12-16 17:32:08.376698: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x1d988eebc40 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-12-16 17:32:08.393623: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device 
+(0): Host, Default Version
+2020-12-16 17:32:08.394508: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+coreClock: 1.515GHz coreCount: 14 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 178.84GiB/s        
+2020-12-16 17:32:08.395678: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-12-16 17:32:08.395876: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-12-16 17:32:08.396070: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2020-12-16 17:32:08.396256: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2020-12-16 17:32:08.396456: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusolver64_10.dll
+2020-12-16 17:32:08.397345: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusparse64_10.dll
+2020-12-16 17:32:08.397540: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-12-16 17:32:08.397872: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-12-16 17:32:08.899249: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-12-16 17:32:08.899888: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0
+2020-12-16 17:32:08.900568: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+2020-12-16 17:32:08.901483: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 2909 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1650, pci bus id: 0000:01:00.0, compute capability: 7.5)
+2020-12-16 17:32:08.942517: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x1d9b226ae30 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-12-16 17:32:08.943383: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device 
+(0): GeForce GTX 1650, Compute Capability 7.5
+.Dataset already exists
+Found 60600 images belonging to 101 classes.
+Found 15150 images belonging to 101 classes.
+.
+----------------------------------------------------------------------
+Ran 8 tests in 18.041s
+
+OK
+PS C:\dev\source\food_image_classifier> coverage run -m unittest discover tests
+2020-12-16 17:39:01.303293: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+.Dataset already exists
+C:\dev\source\food_image_classifier\tests\test_train.py:27: DeprecationWarning: Please use assertTrue 
+instead.
+  self.assert_(result)
+.Dataset already exists
+already existed data/test folder :  food-101/test
+.Dataset already exists
+already existed data/test folder :  food-101/train
+.Dataset already exists
+.Dataset already exists
+2020-12-16 17:39:06.189048: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2020-12-16 17:39:06.217950: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1650 computeCapability: 7.5
+coreClock: 1.515GHz coreCount: 14 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 178.84GiB/s        
+2020-12-16 17:39:06.219171: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-12-16 17:39:06.241592: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-12-16 17:39:06.255678: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2020-12-16 17:39:06.269310: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2020-12-16 17:39:06.289151: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusolver64_10.dll
+2020-12-16 17:39:06.303901: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusparse64_10.dll
+2020-12-16 17:39:06.327912: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-12-16 17:39:06.334474: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-12-16 17:39:06.335819: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-12-16 17:39:06.373708: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x19534bc1d50 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-12-16 17:39:06.384869: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device 
+(0): Host, Default Version
+2020-12-16 17:39:06.385740: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1650 computeCapability: 7.5
+coreClock: 1.515GHz coreCount: 14 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 178.84GiB/s        
+2020-12-16 17:39:06.400295: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-12-16 17:39:06.401295: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-12-16 17:39:06.401854: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2020-12-16 17:39:06.402617: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2020-12-16 17:39:06.419336: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusolver64_10.dll
+2020-12-16 17:39:06.435623: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusparse64_10.dll
+ly opened dynamic library cudnn64_7.dll
+2020-12-16 17:39:06.452532: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gp2020-12-16 17:39:06.944614: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-12-16 17:39:06.945805: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+2020-12-16 17:39:06.946332: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 2909 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1650, pci bus id: 0000:01:00.0, compute capability: 7.5)
+2020-12-16 17:39:06.965150: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x1955dfbb220 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-12-16 17:39:06.965534: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device 
+(0): GeForce GTX 1650, Compute Capability 7.5
+Model loaded...:  food_classifier_checkpoint_20201210.hdf5
+2020-12-16 17:39:12.191464: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-12-16 17:39:12.400966: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-12-16 17:39:13.294323: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: Invoking GPU asm compilation is supported on Cuda non-Windows platforms only
+Relying on driver to perform ptx compilation.
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+.Dataset already exists
+.Dataset already exists
+Found 60600 images belonging to 101 classes.
+Found 15150 images belonging to 101 classes.
+.Dataset already exists
+Found 60600 images belonging to 101 classes.
+Found 15150 images belonging to 101 classes.
+.
+----------------------------------------------------------------------
+Ran 9 tests in 25.753s
+
+OK

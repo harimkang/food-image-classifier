@@ -44,13 +44,18 @@ class Inception_v3:
         self.csv_logger = None
         self.history = None
 
-    def generate_train_val_data(self, num_train_data, data_dir='train/'):
+    def generate_train_val_data(self, data_dir='train/'):
         """
         # Create an ImageDataGenerator by dividing the train and validation set 
         # by 0.8/0.2 based on the train dataset folder.
         # train : 60600 imgs / validation : 15150 imgs
         """
-        self.num_train_data = num_train_data
+        num_data = 0
+        for root, dirs, files in os.walk(data_dir):
+            if files:
+                num_data += len(files)
+        
+        self.num_train_data = num_data
         _datagen = image.ImageDataGenerator(
             rescale=1. / 255,
             shear_range=0.2,
@@ -92,6 +97,7 @@ class Inception_v3:
         self.model.compile(optimizer=SGD(lr=0.0001, momentum=0.9),
                            loss='categorical_crossentropy',
                            metrics=['accuracy'])
+        return 1
 
     def train(self, epochs=10):
         """
@@ -166,8 +172,10 @@ class Inception_v3:
                 if save:
                     plt.savefig(
                         'results/example_{}_{}.png'.format(target_name, save_time))
+            return 1
         else:
             print('Model not found... : load_model or train plz')
+            return 0
 
     def load(self):
         """

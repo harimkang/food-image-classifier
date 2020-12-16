@@ -7,6 +7,17 @@ from shutil import copy
 from collections import defaultdict
 
 
+def check_env_dir():
+    # Create required directory
+    if not os.path.exists(os.path.join('logs', 'training')):
+        os.makedirs(os.path.join('logs', 'training'))
+    if not os.path.exists(os.path.join('models', 'checkpoint')):
+        os.makedirs(os.path.join('models', 'checkpoint'))
+    if not os.path.exists(os.path.join('results', 'train')):
+        os.makedirs(os.path.join('results', 'train'))
+    
+    return 1
+
 def ready_data(data='food-101'):
     """ 
     # It checks whether the food-101 dataset exists, 
@@ -20,12 +31,13 @@ def ready_data(data='food-101'):
             else:
                 data_dir = 'food-101/food-101/'
         else:
-            # TODO: Download data & extract (NOT Check)
-            print("Downloading the data...")
-            import wget
-            dl_add = 'http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz'
-            print("Dataset Downloaded...")
-            wget.download(url=dl_add, out='.')
+            if not os.path.exists(r"food-101.tar.gz"):
+                # TODO: Download data & extract (NOT Check)
+                print("Downloading the data...")
+                import wget
+                dl_add = 'http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz'
+                print("Dataset Downloaded...")
+                wget.download(url=dl_add, out='.')
             print("Dataset Extracted...")
             import tarfile
             tar = tarfile.open(r"food-101.tar.gz", "r:gz")
@@ -36,14 +48,6 @@ def ready_data(data='food-101'):
     else:
         # TODO: other dataset added
         data_dir = None
-
-    # Create required directory
-    if not os.path.exists(os.path.join('logs', 'training')):
-        os.makedirs(os.path.join('logs', 'training'))
-    if not os.path.exists(os.path.join('models', 'checkpoint')):
-        os.makedirs(os.path.join('models', 'checkpoint'))
-    if not os.path.exists(os.path.join('results', 'train')):
-        os.makedirs(os.path.join('results', 'train'))
 
     return data_dir
 

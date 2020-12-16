@@ -1,0 +1,9 @@
+PS C:\dev\source\food_image_classifier> coverage report -i
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+model.py                122     46    62%
+set_data_env.py          63     29    54%
+tests\test_model.py      12      0   100%
+tests\test_train.py      41      0   100%
+-----------------------------------------
+TOTAL                   238     75    68%

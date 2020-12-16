@@ -7,3 +7,6 @@ __pycache__
 # environments
 .venv
 .vscode
+
+# test coverage
+.coverage
