@@ -9,14 +9,16 @@ from tensorflow.keras import layers
 from tensorflow.keras import backend
 
 
-def conv2d_bn(x,
-              filters,
-              kernel_size,
-              strides=1,
-              padding='same',
-              activation='relu',
-              use_bias=False,
-              name=None):
+def conv2d_bn(
+    x,
+    filters,
+    kernel_size,
+    strides=1,
+    padding="same",
+    activation="relu",
+    use_bias=False,
+    name=None,
+):
     """Utility function to apply conv + BN.
     # Arguments
         x: input tensor.
@@ -31,19 +33,19 @@ def conv2d_bn(x,
     # Returns
         Output tensor after applying `Conv2D` and `BatchNormalization`.
     """
-    x = layers.Conv2D(filters,
-                      kernel_size,
-                      strides=strides,
-                      padding=padding,
-                      use_bias=use_bias,
-                      name=name)(x)
+    x = layers.Conv2D(
+        filters,
+        kernel_size,
+        strides=strides,
+        padding=padding,
+        use_bias=use_bias,
+        name=name,
+    )(x)
     if not use_bias:
-        bn_axis = 1 if backend.image_data_format() == 'channels_first' else 3
-        bn_name = None if name is None else name + '_bn'
-        x = layers.BatchNormalization(axis=bn_axis,
-                                      scale=False,
-                                      name=bn_name)(x)
+        bn_axis = 1 if backend.image_data_format() == "channels_first" else 3
+        bn_name = None if name is None else name + "_bn"
+        x = layers.BatchNormalization(axis=bn_axis, scale=False, name=bn_name)(x)
     if activation is not None:
-        ac_name = None if name is None else name + '_ac'
+        ac_name = None if name is None else name + "_ac"
         x = layers.Activation(activation, name=ac_name)(x)
     return x
